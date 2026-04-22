@@ -2,11 +2,13 @@
 import groovy.json.*
 
 def call(body) {
-    def config = [:]
-    body.resolveStrategy = Closure.DELEGATE_FIRST
-    body.delegate = config
+    def mapVars             = [:]
+    body.resolveStrategy    = Closure.DELEGATE_FIRST
+    body.delegate           = mapVars
     body()
 
-    println("Bonjour ${config.nom} !")
-    println("Message : ${config.message}")
+    def name    = mapVars.name
+    def action  = mapVars.action
+
+    println( action + " " + name + "!!")
 }
