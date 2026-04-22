@@ -2,5 +2,11 @@
 import groovy.json.*
 
 def call(body) {
-    println("Hello World !!!")
+    def config = [:]
+    body.resolveStrategy = Closure.DELEGATE_FIRST
+    body.delegate = config
+    body()
+
+    println("Bonjour ${config.nom} !")
+    println("Message : ${config.message}")
 }
